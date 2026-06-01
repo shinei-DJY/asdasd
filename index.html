@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Qwen3 Agent 医疗咨询</h2>
+    <input id="q" placeholder="输入问题，如：感冒症状、BMI计算">
+    <button onclick="ask()">发送</button>
+    <div id="res"></div>
+
+    <script>
+        async function ask() {
+            const q = document.getElementById("q").value;
+            const res = await fetch("/api/agent", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({question:q})
+            });
+            const data = await res.json();
+            document.getElementById("res").innerText = data.answer;
+        }
+    </script>
+</body>
+</html>
